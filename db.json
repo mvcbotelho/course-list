@@ -1,0 +1,25 @@
+{
+  "courses": [
+    {
+      "id": 1,
+      "name": "Angular Básico",
+      "category": "Front-End",
+      "description": "Introdução ao Angular 20 e conceitos de SPA.",
+      "duration": 20
+    },
+    {
+      "id": 2,
+      "name": "Node.js Avançado",
+      "category": "Back-End",
+      "description": "Construção de APIs RESTful com Node.js e Express.",
+      "duration": 35
+    },
+    {
+      "id": 3,
+      "name": "Design Responsivo",
+      "category": "UI/UX",
+      "description": "Técnicas modernas de responsividade com CSS Grid e Flexbox.",
+      "duration": 15
+    }
+  ]
+}
