@@ -1,0 +1,14 @@
+<h1>Catálogo de Cursos</h1>
+
+<div *ngIf="courses$ | async as courses; else loading">
+  <div *ngFor="let course of courses" class="course-card">
+    <h2>{{ course.name }}</h2>
+    <p><strong>Categoria:</strong> {{ course.category }}</p>
+    <p>{{ course.description }}</p>
+    <small><strong>Duração:</strong> {{ course.duration }} horas</small>
+  </div>
+</div>
+
+<ng-template #loading>
+  <p>Carregando cursos...</p>
+</ng-template>
