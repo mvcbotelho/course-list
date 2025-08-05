@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { BehaviorSubject, Observable, combineLatest } from 'rxjs';
+import { map, startWith } from 'rxjs/operators';
 
 export interface Course {
   id: number;
@@ -14,35 +15,71 @@ export interface Course {
   providedIn: 'root'
 })
 export class CoursesService {
-  private apiUrl = 'http://localhost:3000/courses';
-  private coursesSubject = new BehaviorSubject<Course[]>([]);
-  courses$: Observable<Course[]> = this.coursesSubject.asObservable();
+  private readonly API_URL = 'http://localhost:3000/courses';
+  private todosOsCursosSubject = new BehaviorSubject<Course[]>([]);
+  private filtroCategoriaSubject = new BehaviorSubject<string>('');
+
+  public cursosFiltrados$: Observable<Course[]> = combineLatest([
+    this.todosOsCursosSubject.asObservable(),
+    this.filtroCategoriaSubject.asObservable().pipe(startWith(''))
+  ]).pipe(
+    map(([cursos, categoriaFiltro]) => {
+      if (!categoriaFiltro || categoriaFiltro.trim() === '') {
+        return cursos;
+      }
+      return cursos.filter(curso =>
+        curso.category.toLowerCase().includes(categoriaFiltro.toLowerCase())
+      );
+    })
+  );
+
+  public categoriasDisponiveis$: Observable<string[]> = this.todosOsCursosSubject.asObservable().pipe(
+    map(cursos => {
+      const categorias = cursos.map(curso => curso.category);
+      return [...new Set(categorias)].sort();
+    })
+  );
 
   constructor(private http: HttpClient) {
-    this.loadCourses();
+    this.carregarTodosOsCursos();
   }
 
-  // Mock
-  loadCourses() {
-    this.http.get<Course[]>(this.apiUrl).subscribe({
-      next: (courses) => this.coursesSubject.next(courses),
-      error: (err) => console.error('Erro ao carregar cursos:', err)
-    });
+  public carregarTodosOsCursos(): void {
+    try {
+      this.http.get<Course[]>(this.API_URL).subscribe({
+        next: (cursos) => {
+          this.todosOsCursosSubject.next(cursos);
+        },
+        error: (erro) => {
+          this.todosOsCursosSubject.next([]);
+        }
+      });
+    } catch (erro) {
+      this.todosOsCursosSubject.next([]);
+    }
   }
 
-  addCourse(course: Course) {
-    return this.http.post<Course>(this.apiUrl, course).subscribe(() => this.loadCourses());
+  public aplicarFiltroPorCategoria(categoria: string): void {
+    this.filtroCategoriaSubject.next(categoria);
   }
 
-  getCourseById(id: number): Observable<Course> {
-    return this.http.get<Course>(`${this.apiUrl}/${id}`);
+  public limparFiltro(): void {
+    this.filtroCategoriaSubject.next('');
   }
 
-  updateCourse(course: Course) {
-    return this.http.put<Course>(`${this.apiUrl}/${course.id}`, course).subscribe(() => this.loadCourses());
+  public adicionarNovoCurso(curso: Course): Observable<Course> {
+    return this.http.post<Course>(this.API_URL, curso);
   }
 
-  deleteCourse(id: number) {
-    return this.http.delete(`${this.apiUrl}/${id}`).subscribe(() => this.loadCourses());
+  public obterCursoPorId(id: number): Observable<Course> {
+    return this.http.get<Course>(`${this.API_URL}/${id}`);
+  }
+
+  public atualizarCurso(curso: Course): Observable<Course> {
+    return this.http.put<Course>(`${this.API_URL}/${curso.id}`, curso);
+  }
+
+  public removerCurso(id: number): Observable<void> {
+    return this.http.delete<void>(`${this.API_URL}/${id}`);
   }
 }
