@@ -4,22 +4,85 @@
       "id": 1,
       "name": "Angular Básico",
       "category": "Front-End",
-      "description": "Introdução ao Angular 20 e conceitos de SPA.",
+      "description": "Introdução ao Angular 20, componentes, serviços e roteamento. Aprenda a criar SPAs modernas com TypeScript.",
       "duration": 20
     },
     {
       "id": 2,
-      "name": "Node.js Avançado",
-      "category": "Back-End",
-      "description": "Construção de APIs RESTful com Node.js e Express.",
-      "duration": 35
+      "name": "React Avançado",
+      "category": "Front-End",
+      "description": "Hooks avançados, Context API, performance optimization e padrões de arquitetura em React.",
+      "duration": 30
     },
     {
       "id": 3,
+      "name": "Node.js Backend",
+      "category": "Back-End",
+      "description": "Construção de APIs RESTful com Node.js, Express, MongoDB e autenticação JWT.",
+      "duration": 35
+    },
+    {
+      "id": 4,
+      "name": "Java Spring Boot",
+      "category": "Back-End",
+      "description": "Desenvolvimento de aplicações empresariais com Spring Boot, JPA e microserviços.",
+      "duration": 40
+    },
+    {
+      "id": 5,
+      "name": "UI/UX Design",
+      "category": "UI/UX",
+      "description": "Princípios de design, wireframing, prototipagem e ferramentas como Figma e Adobe XD.",
+      "duration": 25
+    },
+    {
+      "id": 6,
       "name": "Design Responsivo",
       "category": "UI/UX",
-      "description": "Técnicas modernas de responsividade com CSS Grid e Flexbox.",
+      "description": "CSS Grid, Flexbox, media queries e técnicas modernas de responsividade.",
       "duration": 15
+    },
+    {
+      "id": 7,
+      "name": "React Native",
+      "category": "Mobile",
+      "description": "Desenvolvimento de aplicativos móveis multiplataforma com React Native e Expo.",
+      "duration": 28
+    },
+    {
+      "id": 8,
+      "name": "Flutter",
+      "category": "Mobile",
+      "description": "Criação de apps nativos com Flutter, Dart e integração com APIs.",
+      "duration": 32
+    },
+    {
+      "id": 9,
+      "name": "Docker & Kubernetes",
+      "category": "DevOps",
+      "description": "Containerização, orquestração e deployment de aplicações com Docker e Kubernetes.",
+      "duration": 22
+    },
+    {
+      "id": 10,
+      "name": "AWS Cloud",
+      "category": "DevOps",
+      "description": "Serviços AWS, arquitetura em nuvem, CI/CD e infraestrutura como código.",
+      "duration": 38
+    },
+    {
+      "id": 11,
+      "name": "Python Data Science",
+      "category": "Data Science",
+      "description": "Análise de dados com Pandas, NumPy, Matplotlib e introdução ao Machine Learning.",
+      "duration": 45
+    },
+    {
+      "id": 12,
+      "name": "Machine Learning",
+      "category": "Data Science",
+      "description": "Algoritmos de ML, Scikit-learn, TensorFlow e aplicações práticas em Python.",
+      "duration": 50
     }
   ]
 }
