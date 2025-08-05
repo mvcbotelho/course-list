@@ -1,0 +1,14 @@
+.main-content {
+  margin-top: 64px; // Altura do header
+  min-height: calc(100vh - 64px);
+  padding: 20px;
+}
+
+// Responsividade
+@media (max-width: 768px) {
+  .main-content {
+    margin-top: 56px; // Header menor em mobile
+    min-height: calc(100vh - 56px);
+    padding: 16px;
+  }
+}
