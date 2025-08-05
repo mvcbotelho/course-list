@@ -1,14 +1,70 @@
-<h1>Catálogo de Cursos</h1>
+<div class="catalogo-container">
+  <div class="header-top">
+    <h1>Catálogo de Cursos</h1>
+    <button mat-raised-button color="primary" class="btn-novo-curso" (click)="novoCurso()">
+      <mat-icon>add</mat-icon>
+      Novo Curso
+    </button>
+  </div>
 
-<div *ngIf="courses$ | async as courses; else loading">
-  <div *ngFor="let course of courses" class="course-card">
-    <h2>{{ course.name }}</h2>
-    <p><strong>Categoria:</strong> {{ course.category }}</p>
-    <p>{{ course.description }}</p>
-    <small><strong>Duração:</strong> {{ course.duration }} horas</small>
+  <div class="filtros-section">
+    <mat-form-field appearance="outline" class="filtro-categoria">
+      <mat-label>Filtrar por Categoria</mat-label>
+      <mat-select [(ngModel)]="categoriaSelecionada" (selectionChange)="onCategoriaSelecionada($event.value)">
+        <mat-option value="todas">Todas as Categorias</mat-option>
+        <mat-option *ngFor="let categoria of categorias$ | async" [value]="categoria">
+          {{ categoria }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <button *ngIf="temFiltroAtivo()"
+            mat-stroked-button
+            color="warn"
+            (click)="limparFiltroAtual()"
+            class="btn-limpar-filtro">
+      <mat-icon>clear</mat-icon>
+      Limpar Filtro
+    </button>
+  </div>
+
+  <div class="cursos-grid" *ngIf="cursos$ | async as cursos">
+    <mat-card *ngFor="let curso of cursos" class="curso-card">
+      <mat-card-header>
+        <mat-card-title>{{ curso.name }}</mat-card-title>
+        <mat-card-subtitle>
+          <mat-chip [color]="getCategoriaColor(curso.category)" selected>
+            {{ curso.category }}
+          </mat-chip>
+        </mat-card-subtitle>
+      </mat-card-header>
+
+      <mat-card-content>
+        <p class="curso-descricao">{{ curso.description }}</p>
+        <div class="curso-info">
+          <span class="duracao">
+            <mat-icon>schedule</mat-icon>
+            {{ curso.duration }} horas
+          </span>
+        </div>
+      </mat-card-content>
+
+      <mat-card-actions>
+        <button mat-button color="primary" (click)="verDetalhes(curso.id)">
+          <mat-icon>visibility</mat-icon>
+          Ver detalhes
+        </button>
+        <button mat-button color="accent" (click)="editarCurso(curso.id)">
+          <mat-icon>edit</mat-icon>
+          Editar
+        </button>
+      </mat-card-actions>
+    </mat-card>
+  </div>
+
+  <div *ngIf="(cursos$ | async)?.length === 0" class="sem-cursos">
+    <mat-icon>school</mat-icon>
+    <h3>Nenhum curso encontrado</h3>
+    <p>Tente ajustar os filtros ou adicione um novo curso.</p>
   </div>
 </div>
-
-<ng-template #loading>
-  <p>Carregando cursos...</p>
-</ng-template>

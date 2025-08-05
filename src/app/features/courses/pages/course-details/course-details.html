@@ -1,0 +1,62 @@
+<div class="course-details-container">
+  <div *ngIf="loading" class="loading-container">
+    <mat-spinner diameter="50"></mat-spinner>
+    <p>Carregando detalhes do curso...</p>
+  </div>
+
+  <div *ngIf="error" class="error-container">
+    <mat-icon>error</mat-icon>
+    <h3>Erro ao carregar curso</h3>
+    <p>Não foi possível carregar os detalhes do curso.</p>
+    <button mat-raised-button color="primary" (click)="backToList()">
+      Voltar para Lista
+    </button>
+  </div>
+
+  <div *ngIf="course && !loading" class="course-content">
+    <mat-card class="course-card">
+      <mat-card-header>
+        <mat-card-title>{{ course.name }}</mat-card-title>
+        <mat-card-subtitle>
+          <mat-chip [color]="getCategoriaColor(course.category)" selected>
+            {{ course.category }}
+          </mat-chip>
+        </mat-card-subtitle>
+      </mat-card-header>
+
+      <mat-card-content>
+        <div class="course-info">
+          <div class="info-section">
+            <h3>Descrição</h3>
+            <p>{{ course.description }}</p>
+          </div>
+
+          <div class="info-section">
+            <h3>Informações</h3>
+            <div class="info-grid">
+              <div class="info-item">
+                <mat-icon>schedule</mat-icon>
+                <span><strong>Duração:</strong> {{ course.duration }} horas</span>
+              </div>
+              <div class="info-item">
+                <mat-icon>category</mat-icon>
+                <span><strong>Categoria:</strong> {{ course.category }}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </mat-card-content>
+
+      <mat-card-actions>
+        <button mat-button color="primary" (click)="backToList()">
+          <mat-icon>arrow_back</mat-icon>
+          Voltar
+        </button>
+        <button mat-raised-button color="accent" (click)="editCourse()">
+          <mat-icon>edit</mat-icon>
+          Editar Curso
+        </button>
+      </mat-card-actions>
+    </mat-card>
+  </div>
+</div>
