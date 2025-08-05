@@ -1,59 +1,177 @@
-# CatalogoCursos
+# 📚 Catálogo de Cursos - Angular
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 20.1.3.
+Uma aplicação web Angular para gerenciamento de catálogo de cursos de uma empresa, desenvolvida como parte de um desafio técnico.
 
-## Development server
+## 🎯 Objetivo
 
-To start a local development server, run:
+Criar uma aplicação web Angular que simule a visualização e o gerenciamento de um catálogo de cursos de uma empresa, demonstrando domínio das tecnologias e boas práticas de desenvolvimento.
 
-```bash
-ng serve
+## ✨ Funcionalidades
+
+### Requisitos Funcionais Implementados
+- ✅ **Listagem de cursos** com todos os campos (nome, categoria, descrição, carga horária)
+- ✅ **Filtro por categoria** com interface intuitiva
+- ✅ **Página de detalhes** de cada curso
+- ✅ **Formulário de cadastro/edição** de cursos
+- ✅ **Validação de campos obrigatórios** com feedback visual
+- ✅ **Interface responsiva** (mobile e desktop)
+
+### Requisitos Técnicos Implementados
+- ✅ **Angular 20.1.0** (superior ao 14 requerido)
+- ✅ **Componentes reutilizáveis** com separação clara de responsabilidades
+- ✅ **Input/Output, EventEmitter, ViewChild** utilizados adequadamente
+- ✅ **RxJS** (Observables, BehaviorSubjects) para gerenciamento de estado
+- ✅ **Roteamento com lazy loading** para otimização de performance
+- ✅ **Services** com separação clara de responsabilidades
+- ✅ **Guard de autenticação** para proteção de rotas
+- ✅ **Interceptor HTTP** para logs e headers automáticos
+- ✅ **Angular Material** para interface moderna e acessível
+- ✅ **Responsividade** com Flexbox/Grid
+- ✅ **SCSS** para estilos organizados e reutilizáveis
+- ✅ **Mock API** com JSON Server
+- ✅ **Clean Code** e componentização adequada
+
+## 🛠️ Tecnologias e Bibliotecas
+
+### Core
+- **Angular 20.1.0** - Framework principal
+- **TypeScript** - Linguagem de programação
+- **RxJS** - Programação reativa
+
+### UI/UX
+- **Angular Material** - Componentes de interface
+- **SCSS** - Pré-processador CSS
+- **Flexbox/Grid** - Layout responsivo
+
+### Backend Mock
+- **JSON Server** - API mock para desenvolvimento
+
+### Desenvolvimento
+- **Angular CLI** - Ferramentas de desenvolvimento
+- **Vite** - Bundler e dev server
+
+## 📁 Estrutura do Projeto
+
+```
+src/
+├── app/
+│   ├── components/
+│   │   └── header/                 # Componente de cabeçalho
+│   ├── features/
+│   │   └── courses/                # Feature module de cursos
+│   │       ├── pages/
+│   │       │   ├── course-list/    # Lista de cursos
+│   │       │   ├── course-details/ # Detalhes do curso
+│   │       │   └── course-form/    # Formulário de criação/edição
+│   │       └── services/
+│   │           └── courses.service.ts
+│   ├── guards/
+│   │   └── auth.guard.ts          # Guard de autenticação
+│   ├── interceptors/
+│   │   └── logging.interceptor.ts  # Interceptor HTTP
+│   └── services/
+│       └── auth.service.ts         # Service de autenticação
+├── assets/
+└── styles/
 ```
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+## 🚀 Como Executar o Projeto
 
-## Code scaffolding
+### Pré-requisitos
+- Node.js (versão 18 ou superior)
+- npm ou yarn
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+### Instalação
 
+1. **Clone o repositório**
 ```bash
-ng generate component component-name
+git clone <url-do-repositorio>
+cd catalogo-cursos
 ```
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
-
+2. **Instale as dependências**
 ```bash
-ng generate --help
+npm install
 ```
 
-## Building
-
-To build the project run:
-
+3. **Inicie o servidor mock (JSON Server)**
 ```bash
-ng build
+npm run json-server
+```
+O servidor estará disponível em: http://localhost:3000
+
+4. **Em outro terminal, inicie a aplicação Angular**
+```bash
+npm start
+```
+A aplicação estará disponível em: http://localhost:4200
+
+### Scripts Disponíveis
+
+- `npm start` - Inicia o servidor de desenvolvimento
+- `npm run build` - Gera build de produção
+- `npm run json-server` - Inicia o servidor mock
+- `npm test` - Executa os testes unitários
+
+## 🎮 Como Usar a Aplicação
+
+### Navegação Principal
+1. **Lista de Cursos**: Página inicial com todos os cursos
+2. **Filtros**: Use o dropdown para filtrar por categoria
+3. **Detalhes**: Clique em "Ver detalhes" para ver informações completas
+4. **Edição**: Clique em "Editar" para modificar um curso
+5. **Novo Curso**: Clique em "Novo Curso" para criar um novo
+
+### Funcionalidades de Autenticação
+- **Usuário Simulado**: João Silva (admin)
+- **Áreas Protegidas**: Criação e edição de cursos
+- **Logout**: Disponível no menu do usuário no header
+
+### API Mock
+- **Endpoint**: http://localhost:3000/courses
+- **Métodos**: GET, POST, PUT, DELETE
+- **Dados**: Cursos com nome, categoria, descrição e carga horária
+
+## 🔧 Configurações
+
+### Angular Material
+Todos os componentes do Angular Material estão configurados e funcionando:
+- MatCard, MatButton, MatIcon
+- MatFormField, MatInput, MatSelect
+- MatToolbar, MatMenu, MatDivider
+- MatSnackBar para notificações
+
+### Interceptor HTTP
+- Adiciona headers automáticos em todas as requisições
+- Rastreia requisições para debugging
+- Configurado para funcionar com JSON Server
+
+### Guard de Autenticação
+- Protege rotas de criação/edição de cursos
+- Simula verificação de autenticação
+- Mostra mensagens informativas para usuários
+
+## 📱 Responsividade
+
+A aplicação é totalmente responsiva e funciona em:
+- **Desktop**: Layout completo com todas as funcionalidades
+- **Tablet**: Layout adaptado com navegação otimizada
+- **Mobile**: Interface touch-friendly com menu compacto
+
+## 🧪 Testes
+
+Para executar os testes:
+```bash
+npm test
 ```
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
+## 📦 Build de Produção
 
-## Running unit tests
-
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
-
+Para gerar o build de produção:
 ```bash
-ng test
+npm run build
 ```
 
-## Running end-to-end tests
+---
 
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+**Nota**: README.md e db.json foram criados com IA
